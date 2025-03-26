@@ -81,7 +81,7 @@ class MessageInfo {
             messageElement.classList.add("message-item");
     
             messageElement.innerHTML = `
-                <strong>${message.name}</strong> (${message.timestamp}): <br>
+                <strong>${message.name}</strong> (${message.timestamp}) <br>
                 ${message.message}
                 <hr>
             `;
