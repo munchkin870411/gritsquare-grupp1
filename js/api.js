@@ -1,4 +1,5 @@
 const base_url = "https://fe24-vs-grupp1-slutprojekt-default-rtdb.europe-west1.firebasedatabase.app/";
+// comments
     
 class MessageInfo {
     constructor(name, message) {
