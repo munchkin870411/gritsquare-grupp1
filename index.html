@@ -17,7 +17,7 @@
   </head>
   <body>
     <div class="formContainer">
-      <form action="">
+      <form id="messageForm">
         <label for="name">Username:</label>
         <input
           type="text"
@@ -27,13 +27,15 @@
           required
         />
         <textarea
-          name="messeage"
+          name="message"
           id="messageBoard"
           placeholder="Write your message here"
         ></textarea>
         <button type="submit" id="submitButton">Submit</button>
       </form>
     </div>
-    <div class="messageContainer"></div>
+    <div class="messageContainer">
+      <div id="messageDisplay"></div>
+    </div>
   </body>
 </html>
