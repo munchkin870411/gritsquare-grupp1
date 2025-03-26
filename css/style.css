@@ -51,6 +51,7 @@ body {
   width: 200px; /* Adjust width for textarea */
   height: 30px; /* Adjust height for textarea */
   resize: none; /* Disable resizing */
+  font-size: 14px;
 }
 
 #submitButton {
