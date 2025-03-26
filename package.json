@@ -1,10 +1,23 @@
 {
-  "dependencies": {
-    "firebase": "^11.5.0",
-    "init": "^0.1.2"
+  "name": "parcell-mall",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "parcel ./index.html",
+    "build": "parcel build ./index.html --dist-dir public --public-url ./",
+    "clean": "del-cli ./.parcel-cache ./docs ./dist"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "devDependencies": {
     "del-cli": "^6.0.0",
-    "parcel": "^2.14.2"
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "@swc/core": "^1.10.11",
+    "domhandler": "^5.0.3",
+    "firebase": "^11.3.0"
   }
 }

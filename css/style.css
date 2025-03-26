@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: Inter, 'Times New Roman', Times, serif;
+  font-family: Inter, "Times New Roman", Times, serif;
 }
 
 html,
@@ -12,7 +12,7 @@ body {
 }
 
 .messageContainer {
-  background-color: red;
+  background-color: hotpink;
 }
 
 .formContainer {
@@ -51,6 +51,7 @@ body {
   width: 200px; /* Adjust width for textarea */
   height: 30px; /* Adjust height for textarea */
   resize: none; /* Disable resizing */
+  font-size: 13px;
 }
 
 #submitButton {
@@ -66,4 +67,12 @@ body {
 #submitButton:hover {
   background-color: #0056b3;
   scale: 110%;
+}
+
+.message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
