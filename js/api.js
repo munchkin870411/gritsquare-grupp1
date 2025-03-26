@@ -12,7 +12,7 @@ class MessageInfo {
     export async function addMessage(event) {
         event.preventDefault();
 
-        const name = document.querySelector('#name').value.trim;
+        const name = document.querySelector('#name').value.trim();
         const message = document.querySelector('#messageBoard').value.trim();
 
         if (!name || !message) {
