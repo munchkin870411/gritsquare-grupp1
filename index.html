@@ -6,6 +6,12 @@
     <title>GritSquare</title>
     <link rel="shortcut icon" href="./assets/grit_academy_logo.ico" />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
     <script src="./js/main.js" type="module"></script>
   </head>
   <body>
@@ -19,11 +25,14 @@
           placeholder="Enter your name"
           required
         />
+        <textarea
+          name="messeage"
+          id="messageBoard"
+          placeholder="Write your message here"
+        ></textarea>
         <button type="submit" id="submitButton">Submit</button>
       </form>
     </div>
-    <div class="messageContainer">
-        
-    </div>
+    <div class="messageContainer"></div>
   </body>
 </html>
