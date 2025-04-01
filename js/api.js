@@ -2,6 +2,13 @@ const base_url =
     "https://fe24-vs-grupp1-slutprojekt-default-rtdb.europe-west1.firebasedatabase.app/.json";
 // comments
 // ännu mer comments lol
+const sortfilter = document.getElementById("sort")
+sortfilter.addEventListener('change', async() => {
+    console.log("test");
+    document.getElementById("messageDisplay").innerHTML = ""
+    fetchMessages();
+})
+
 class MessageInfo {
     constructor(name, message) {
         this.name = name;
@@ -101,8 +108,41 @@ export async function fetchMessages() {
         if (!res.ok) throw new Error("Could not fetch messages");
 
         const data = await res.json();
-        const messageArray = data ? Object.values(data) : [];
+        let messageArray = data ? Object.values(data) : [];
+        const sortOption= sortfilter.value
+        console.log(sortOption);
+        switch (sortOption) {
+            case "alpha-asend":
+                messageArray.sort((b,a)=>{
+                    if (a.name < b.name) 
+                        return -1;
+                    else if (a.name > b.name) 
+                        return 1;
+                    return 0; })
+                break;       
+                
+            case "alpha-desend":
+                messageArray.sort((a,b)=> {   
+                    if (a.name < b.name) 
+                        return -1;
+                    else if (a.name > b.name) 
+                        return 1;
+                  return 0; })
+                break;
+            case "message-length":
+                messageArray.sort((b,a)=>{
+                    if (a.message.length < b.message.length) 
+                        return -1;
+                    else if (a.message.length > b.message.length) 
+                        return 1;
+                    return 0; })
+                break;       
+            default:
+                break;
+        }
 
+        console.log(messageArray);
+        
         displayMessages(messageArray);
         displayMessageOfTheDay(messageArray);
     } catch (error) {
