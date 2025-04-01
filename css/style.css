@@ -117,3 +117,42 @@ body {
 .shake {
     animation: shake 1s;
 }
+
+
+.birthdayDiv{
+  display: none;
+  position: absolute;
+  font-size: 100px;
+  z-index: 100000;
+  top: 70px;
+  color: #ff13b4;
+  background-color: #0056b3;
+  left: 0;
+}
+
+.birthdayDiv h1{
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.bounceEffect {
+    animation: bounce 1s infinite;
+}
+
