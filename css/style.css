@@ -22,6 +22,11 @@ body.dark-mode {
     color: white;
 }
 
+body.dark-mode .formContainer {
+    background-color: rgb(38, 38, 38);
+    color: white;
+}
+
 .messageContainer {
     background-color: white;
 }
@@ -30,14 +35,14 @@ body.dark-mode {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #bfbfbf;
+    background-color: #8c8c8c;
     padding: 20px 20px;
     border-radius: 5px;
     color: white;
 }
 
 .formContainer.dark-mode {
-    background-color: #2f2f2f;
+    background-color: #444;
     color: white;
 }
 
