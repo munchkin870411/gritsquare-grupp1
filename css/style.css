@@ -186,6 +186,61 @@ body.dark-mode .formContainer {
     animation: bounce 1s infinite;
 }
 
+.search-container {
+    position: relative;
+    margin: 15px 0;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#messageSearch {
+    width: 100%;
+    padding: 8px 12px 8px 35px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    left: 30px;
+    color: #777;
+}
+
+#messageSearch:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.search-container.dark-mode #messageSearch {
+    background-color: #333;
+    color: white;
+    border-color: #555;
+}
+
+.search-container.dark-mode .search-icon {
+    color: #aaa;
+}
+
+#searchResultCount {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #777;
+}
+
+.search-container.dark-mode #searchResultCount {
+    color: #bbb;
+}
+
+/* Animation for showing/hiding messages */
+.message-item {
+    transition: opacity 0.3s ease;
+}
+
 @keyframes bounce {
     0% {
         transform: translateY(0);
