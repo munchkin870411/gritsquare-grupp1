@@ -75,6 +75,7 @@ export async function fetchMessages() {
         const messageArray = data ? Object.values(data) : [];
 
         displayMessages(messageArray);
+        displayMessageOfTheDay(messageArray);
     } catch (error) {
         console.error("Error fetching messages:", error);
     }
@@ -115,3 +116,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 messageDisplay.prepend(messageElement);
+
+export function displayMessageOfTheDay(messages) {
+    const motdContainer = document.querySelector("#motdDisplay");
+
+    if (!motdContainer) {
+        console.error("MOTD container not found.");
+        return;
+    }
+
+    if (messages.length === 0) {
+        motdContainer.textContent = "No messages yet.";
+        return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    const motd = messages[randomIndex];
+
+    motdContainer.innerHTML = `
+        <strong>${motd.name}</strong> (${motd.timestamp}) <br>
+        "${motd.message}"
+    `;
+}
+
