@@ -2,12 +2,12 @@ const base_url =
     "https://fe24-vs-grupp1-slutprojekt-default-rtdb.europe-west1.firebasedatabase.app/.json";
 // comments
 // ännu mer comments lol
-const sortfilter = document.getElementById("sort")
-sortfilter.addEventListener('change', async() => {
+const sortfilter = document.getElementById("sort");
+sortfilter.addEventListener("change", async () => {
     console.log("test");
-    document.getElementById("messageDisplay").innerHTML = ""
+    document.getElementById("messageDisplay").innerHTML = "";
     fetchMessages();
-})
+});
 
 class MessageInfo {
     constructor(name, message) {
@@ -111,49 +111,42 @@ export async function fetchMessages() {
 
         const data = await res.json();
         let messageArray = data ? Object.values(data) : [];
-        const sortOption= sortfilter.value
+        const sortOption = sortfilter.value;
         console.log(sortOption);
         switch (sortOption) {
             case "alpha-asend":
-                messageArray.sort((b,a)=>{
-                    if (a.name < b.name) 
-                        return -1;
-                    else if (a.name > b.name) 
-                        return 1;
-                    return 0; })
-                break;       
-                
+                messageArray.sort((b, a) => {
+                    if (a.name < b.name) return -1;
+                    else if (a.name > b.name) return 1;
+                    return 0;
+                });
+                break;
+
             case "alpha-desend":
-                messageArray.sort((a,b)=> {   
-                    if (a.name < b.name) 
-                        return -1;
-                    else if (a.name > b.name) 
-                        return 1;
-                  return 0; })
+                messageArray.sort((a, b) => {
+                    if (a.name < b.name) return -1;
+                    else if (a.name > b.name) return 1;
+                    return 0;
+                });
                 break;
             case "message-length":
-                messageArray.sort((b,a)=>{
-                    if (a.message.length < b.message.length) 
-                        return -1;
-                    else if (a.message.length > b.message.length) 
-                        return 1;
-                    return 0; })
-                break;       
+                messageArray.sort((b, a) => {
+                    if (a.message.length < b.message.length) return -1;
+                    else if (a.message.length > b.message.length) return 1;
+                    return 0;
+                });
+                break;
             default:
                 break;
         }
 
         console.log(messageArray);
-        
-        displayMessages(messageArray);
-        displayMessageOfTheDay(messageArray);
-        const messageArray = data ? Object.values(data) : [];
 
         if (messageArray.length === 0) {
-            displayNoMessagesMessage();  // Visa meddelande om inga meddelanden finns
+            displayNoMessagesMessage(); // Visa meddelande om inga meddelanden finns
         } else {
-            displayMessages(messageArray);  // Visa meddelandena
-            displayMessageOfTheDay(messageArray);  // Visa dagens meddelande
+            displayMessages(messageArray); // Visa meddelandena
+            displayMessageOfTheDay(messageArray); // Visa dagens meddelande
         }
     } catch (error) {
         console.error("Error fetching messages:", error);
@@ -203,7 +196,7 @@ function showSuccessNotification() {
     const notification = document.createElement("div");
     notification.classList.add("notification");
     notification.textContent = "Meddelandet har skickats!";
-    
+
     document.body.appendChild(notification);
 
     // Ta bort notifieringen efter 3 sekunder
