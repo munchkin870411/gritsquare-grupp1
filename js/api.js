@@ -23,7 +23,7 @@ async function shakeMessages() {
     });
 }
 
-// generating color 
+// generating color
 
 function createRandomColor() {
     const getRandomValue = () => Math.floor(Math.random() * 156) + 100;
@@ -44,13 +44,13 @@ function createRandomColor() {
 
 export async function addMessage(event) {
     event.preventDefault();
-    
+
     const nameInput = document.querySelector("#name");
     const messageInput = document.querySelector("#messageBoard");
 
     const name = nameInput.value.trim();
     const message = messageInput.value.trim();
-    const birthdayDiv = document.querySelector('.birthdayDiv');
+    const birthdayDiv = document.querySelector(".birthdayDiv");
     birthdayDiv.style.display = "none";
     if (!name || !message) {
         alert("Provide both name and message");
@@ -64,38 +64,36 @@ export async function addMessage(event) {
     } else {
         birthdayDiv.style.display = "none";
     }
-    
 
-       
-        const newMessage = new MessageInfo(name, message);
+    const newMessage = new MessageInfo(name, message);
 
-        const options = {
-            method: "POST",
-            body: JSON.stringify(newMessage),
-            headers: {
-                "Content-Type": "application/json; charset=UTF-8",
-            },
-        };
+    const options = {
+        method: "POST",
+        body: JSON.stringify(newMessage),
+        headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+        },
+    };
 
-        try {
-            const res = await fetch(base_url, options);
-            if (!res.ok)
-                throw new Error(
-                    "Something went wrong when adding a message. Try again!"
-                );
+    try {
+        const res = await fetch(base_url, options);
+        if (!res.ok)
+            throw new Error(
+                "Something went wrong when adding a message. Try again!"
+            );
 
-            const data = await res.json();
-            console.log("Message added:", data);
+        const data = await res.json();
+        console.log("Message added:", data);
 
-            fetchMessages();
+        fetchMessages();
 
-            nameInput.value = "";
-            messageInput.value = "";
-        } catch (error) {
-            console.error("Error:", error);
-            alert("Could not add a message, try again!");
-        }
+        nameInput.value = "";
+        messageInput.value = "";
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Could not add a message, try again!");
     }
+}
 
 export async function fetchMessages() {
     try {
@@ -106,6 +104,7 @@ export async function fetchMessages() {
         const messageArray = data ? Object.values(data) : [];
 
         displayMessages(messageArray);
+        displayMessageOfTheDay(messageArray);
     } catch (error) {
         console.error("Error fetching messages:", error);
     }
@@ -125,7 +124,7 @@ export function displayMessages(messages) {
         const messageElement = document.createElement("div");
         messageElement.classList.add("message-item");
         const backgroundColor = createRandomColor();
-        messageElement.style.backgroundColor = backgroundColor; 
+        messageElement.style.backgroundColor = backgroundColor;
 
         messageElement.innerHTML = `
                 <strong>${message.name}</strong> (${message.timestamp}) <br>
@@ -148,3 +147,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 messageDisplay.prepend(messageElement);
+
+export function displayMessageOfTheDay(messages) {
+    const motdContainer = document.querySelector("#motdDisplay");
+
+    if (!motdContainer) {
+        console.error("MOTD container not found.");
+        return;
+    }
+
+    if (messages.length === 0) {
+        motdContainer.textContent = "No messages yet.";
+        return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    const motd = messages[randomIndex];
+
+    motdContainer.innerHTML = `
+        <strong>${motd.name}</strong> (${motd.timestamp}) <br>
+        "${motd.message}"
+    `;
+}
