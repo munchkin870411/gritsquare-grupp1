@@ -56,7 +56,7 @@ export async function addMessage(event) {
         alert("Provide both name and message");
         return;
     }
-    if (message.includes("birthday")) {
+    if (message.includes("my birthday")) {
         birthdayDiv.style.display = "block";
         setTimeout(() => {
             birthdayDiv.style.display = "none";
