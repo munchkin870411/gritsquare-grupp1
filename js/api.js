@@ -23,7 +23,7 @@ async function shakeMessages() {
     });
 }
 
-// generating color 
+// generating color
 
 function createRandomColor() {
     const getRandomValue = () => Math.floor(Math.random() * 156) + 100;
@@ -44,16 +44,25 @@ function createRandomColor() {
 
 export async function addMessage(event) {
     event.preventDefault();
-    
+
     const nameInput = document.querySelector("#name");
     const messageInput = document.querySelector("#messageBoard");
 
     const name = nameInput.value.trim();
     const message = messageInput.value.trim();
-
+    const birthdayDiv = document.querySelector(".birthdayDiv");
+    birthdayDiv.style.display = "none";
     if (!name || !message) {
         alert("Provide both name and message");
         return;
+    }
+    if (message.includes("my birthday")) {
+        birthdayDiv.style.display = "block";
+        setTimeout(() => {
+            birthdayDiv.style.display = "none";
+        }, 2000);
+    } else {
+        birthdayDiv.style.display = "none";
     }
 
     const newMessage = new MessageInfo(name, message);
@@ -133,7 +142,7 @@ export function displayMessages(messages) {
         const messageElement = document.createElement("div");
         messageElement.classList.add("message-item");
         const backgroundColor = createRandomColor();
-        messageElement.style.backgroundColor = backgroundColor; 
+        messageElement.style.backgroundColor = backgroundColor;
 
         messageElement.innerHTML = `
                 <strong>${message.name}</strong> (${message.timestamp}) <br>
