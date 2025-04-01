@@ -50,41 +50,52 @@ export async function addMessage(event) {
 
     const name = nameInput.value.trim();
     const message = messageInput.value.trim();
-
+    const birthdayDiv = document.querySelector('.birthdayDiv');
+    birthdayDiv.style.display = "none";
     if (!name || !message) {
         alert("Provide both name and message");
         return;
     }
-
-    const newMessage = new MessageInfo(name, message);
-
-    const options = {
-        method: "POST",
-        body: JSON.stringify(newMessage),
-        headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-        },
-    };
-
-    try {
-        const res = await fetch(base_url, options);
-        if (!res.ok)
-            throw new Error(
-                "Something went wrong when adding a message. Try again!"
-            );
-
-        const data = await res.json();
-        console.log("Message added:", data);
-
-        fetchMessages();
-
-        nameInput.value = "";
-        messageInput.value = "";
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Could not add a message, try again!");
+    if (message.includes("birthday")) {
+        birthdayDiv.style.display = "block";
+        setTimeout(() => {
+            birthdayDiv.style.display = "none";
+        }, 2000);
+    } else {
+        birthdayDiv.style.display = "none";
     }
-}
+    
+
+       
+        const newMessage = new MessageInfo(name, message);
+
+        const options = {
+            method: "POST",
+            body: JSON.stringify(newMessage),
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8",
+            },
+        };
+
+        try {
+            const res = await fetch(base_url, options);
+            if (!res.ok)
+                throw new Error(
+                    "Something went wrong when adding a message. Try again!"
+                );
+
+            const data = await res.json();
+            console.log("Message added:", data);
+
+            fetchMessages();
+
+            nameInput.value = "";
+            messageInput.value = "";
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Could not add a message, try again!");
+        }
+    }
 
 export async function fetchMessages() {
     try {
