@@ -11,6 +11,17 @@ body {
     height: 100%;
 }
 
+body {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
 .messageContainer {
     background-color: white;
 }
@@ -19,9 +30,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #333;
+    background-color: #bfbfbf;
     padding: 20px 20px;
     border-radius: 5px;
+    color: white;
+}
+
+.formContainer.dark-mode {
+    background-color: #2f2f2f;
     color: white;
 }
 
@@ -62,6 +78,11 @@ body {
     border-radius: 3px;
     cursor: pointer;
     font-weight: bold;
+}
+
+#submitButton.dark-mode {
+    background-color: #444;
+    color: white;
 }
 
 #submitButton:hover {
@@ -118,20 +139,19 @@ body {
     animation: shake 1s;
 }
 
-
-.birthdayDiv{
-  display: none;
-  position: absolute;
-  font-size: 100px;
-  z-index: 100000;
-  top: 70px;
-  color: #ff13b4;
-  background-color: #0056b3;
-  left: 0;
+.birthdayDiv {
+    display: none;
+    position: absolute;
+    font-size: 100px;
+    z-index: 100000;
+    top: 70px;
+    color: #ff13b4;
+    background-color: #0056b3;
+    left: 0;
 }
 
-.birthdayDiv h1{
-  animation: bounce 1s infinite;
+.birthdayDiv h1 {
+    animation: bounce 1s infinite;
 }
 
 @keyframes bounce {
@@ -155,4 +175,3 @@ body {
 .bounceEffect {
     animation: bounce 1s infinite;
 }
-
