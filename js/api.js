@@ -63,7 +63,7 @@ export async function addMessage(event) {
         alert("Provide both name and message");
         return;
     }
-    if (message.includes("birthday")) {
+    if (message.includes("my birthday")) {
         birthdayDiv.style.display = "block";
         setTimeout(() => {
             birthdayDiv.style.display = "none";
@@ -96,6 +96,8 @@ export async function addMessage(event) {
 
         nameInput.value = "";
         messageInput.value = "";
+
+        showSuccessNotification(); // Visar en notifiering om att meddelandet skickades
     } catch (error) {
         console.error("Error:", error);
         alert("Could not add a message, try again!");
@@ -145,9 +147,29 @@ export async function fetchMessages() {
         
         displayMessages(messageArray);
         displayMessageOfTheDay(messageArray);
+        const messageArray = data ? Object.values(data) : [];
+
+        if (messageArray.length === 0) {
+            displayNoMessagesMessage();  // Visa meddelande om inga meddelanden finns
+        } else {
+            displayMessages(messageArray);  // Visa meddelandena
+            displayMessageOfTheDay(messageArray);  // Visa dagens meddelande
+        }
     } catch (error) {
         console.error("Error fetching messages:", error);
     }
+}
+
+// Ny funktion för att visa ett meddelande när inga meddelanden finns
+function displayNoMessagesMessage() {
+    const messageDisplay = document.querySelector("#messageDisplay");
+
+    if (!messageDisplay) {
+        console.error("Error: #messageDisplay not found");
+        return;
+    }
+
+    messageDisplay.innerHTML = "<p>Inga meddelanden än.</p>";
 }
 
 export function displayMessages(messages) {
@@ -176,6 +198,20 @@ export function displayMessages(messages) {
     });
 }
 
+// Ny funktion för att visa en notifiering om att meddelandet skickades
+function showSuccessNotification() {
+    const notification = document.createElement("div");
+    notification.classList.add("notification");
+    notification.textContent = "Meddelandet har skickats!";
+    
+    document.body.appendChild(notification);
+
+    // Ta bort notifieringen efter 3 sekunder
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     fetchMessages();
 
@@ -186,7 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Error");
     }
 });
-messageDisplay.prepend(messageElement);
 
 export function displayMessageOfTheDay(messages) {
     const motdContainer = document.querySelector("#motdDisplay");
