@@ -23,8 +23,28 @@ async function shakeMessages() {
     });
 }
 
+// generating color 
+
+function createRandomColor() {
+    const getRandomValue = () => Math.floor(Math.random() * 156) + 100;
+
+    let red = getRandomValue();
+    let green = getRandomValue();
+    let blue = getRandomValue();
+
+    const MIN_DIFF = 50;
+    if (Math.abs(red - green) < MIN_DIFF) green = (green + 100) % 256;
+    if (Math.abs(green - blue) < MIN_DIFF) blue = (blue + 100) % 256;
+    if (Math.abs(blue - red) < MIN_DIFF) red = (red + 100) % 256;
+
+    const rgbColor = `rgb(${red}, ${green}, ${blue})`;
+    console.log(rgbColor);
+    return rgbColor;
+}
+
 export async function addMessage(event) {
     event.preventDefault();
+    
     const nameInput = document.querySelector("#name");
     const messageInput = document.querySelector("#messageBoard");
 
@@ -93,6 +113,8 @@ export function displayMessages(messages) {
     messages.forEach((message) => {
         const messageElement = document.createElement("div");
         messageElement.classList.add("message-item");
+        const backgroundColor = createRandomColor();
+        messageElement.style.backgroundColor = backgroundColor; 
 
         messageElement.innerHTML = `
                 <strong>${message.name}</strong> (${message.timestamp}) <br>
