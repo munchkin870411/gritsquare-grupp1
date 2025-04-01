@@ -10,6 +10,58 @@ class MessageInfo {
     }
 }
 
+async function shakeMessages(){
+    const allMessages = document.querySelectorAll('.message-item');
+    allMessages.forEach((msg) => {
+        const delay = Math.random() * 500;
+  setTimeout(() => {
+    msg.classList.add("shake");
+    setTimeout(() => {
+      msg.classList.remove("shake");
+    }, 1000);
+  }, delay);
+    })
+}
+
+    export async function addMessage(event) {
+        event.preventDefault();
+        const nameInput = document.querySelector('#name');
+        const messageInput = document.querySelector('#messageBoard');
+
+        const name = nameInput.value.trim();
+        const message = messageInput.value.trim();
+
+        if (!name || !message) {
+            alert('Provide both name and message');
+            return;
+        }
+        
+        const newMessage = new MessageInfo(name, message);
+
+        const options = {
+            method: "POST", 
+            body: JSON.stringify(newMessage),
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8"
+            }
+        };
+
+        try {
+            const res = await fetch(base_url, options);
+            if (!res.ok) throw new Error("Something went wrong when adding a message. Try again!");
+    
+            const data = await res.json();
+            console.log("Message added:", data);
+
+            fetchMessages();
+    
+            nameInput.value = "";
+            messageInput.value = "";
+
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Could not add a message, try again!");
+        }
 export async function addMessage(event) {
     event.preventDefault();
 
@@ -87,6 +139,11 @@ export function displayMessages(messages) {
                 ${message.message}
                 <hr>
             `;
+    
+            messageDisplay.prepend(messageElement);
+             shakeMessages();
+        });
+    }
 
         messageDisplay.prepend(messageElement);
     });
