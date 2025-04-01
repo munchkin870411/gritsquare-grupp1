@@ -10,9 +10,21 @@ class MessageInfo {
     }
 }
 
+async function shakeMessages(){
+    const allMessages = document.querySelectorAll('.message-item');
+    allMessages.forEach((msg) => {
+        const delay = Math.random() * 500;
+  setTimeout(() => {
+    msg.classList.add("shake");
+    setTimeout(() => {
+      msg.classList.remove("shake");
+    }, 1000);
+  }, delay);
+    })
+}
+
     export async function addMessage(event) {
         event.preventDefault();
-        
         const nameInput = document.querySelector('#name');
         const messageInput = document.querySelector('#messageBoard');
 
@@ -87,6 +99,7 @@ class MessageInfo {
             `;
     
             messageDisplay.prepend(messageElement);
+             shakeMessages();
         });
     }
 
