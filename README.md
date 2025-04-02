@@ -11,16 +11,6 @@ GritSquare is a web application that allows users to post, view, and manage mess
 -   **Animations**: Includes fun animations like shaking messages and fireworks.
 -   **Responsive Design**: Optimized for both desktop and mobile devices.
 
-## Project Structure
-
-Workspace
-(rerun without)
-Collecting workspace information
-
-Here is a simple and consistent README.md for your project:
-
-├── assets/ # Static assets like icons and audio files ├── css/ # Stylesheets │ └── style.css # Main CSS file ├── js/ # JavaScript files │ ├── api.js # Handles API interactions │ ├── main.js # Main application logic │ ├── search.js # Search functionality │ ├── fireworks.js # Fireworks animation │ └── firebase.js # Firebase configuration ├── public/ # Build output directory ├── .parcel-cache/ # Parcel cache (ignored in version control) ├── index.html # Main HTML file ├── package.json # Project dependencies and scripts └── README.md # Project documentation
-
 ## Installation
 
 1. Clone the repository:
@@ -61,3 +51,8 @@ Here is a simple and consistent README.md for your project:
 ## Project Documentation
 
 For more details about the project, refer to https://github.com/KevinRuangrad/fe24-versionshantering-gritsquare-grupp1/wiki
+
+![Skiss3 Medium](https://github.com/user-attachments/assets/036f509b-7447-480a-9e6a-f91dec29464d)
+![Mockup3](https://github.com/user-attachments/assets/3f1ac479-5125-4a1c-a573-4c47c8ee8654)
+![Wireframe2](https://github.com/user-attachments/assets/19e440fe-6013-478b-8e48-9c84faf49bc2)
+
