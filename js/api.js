@@ -1,3 +1,5 @@
+import { triggerFireworks } from "./fireworks.js";
+
 const base_url =
     "https://fe24-vs-grupp1-slutprojekt-default-rtdb.europe-west1.firebasedatabase.app/.json";
 // comments
@@ -122,6 +124,8 @@ export async function addMessage(event) {
 
         nameInput.value = "";
         messageInput.value = "";
+            const formContainer = document.querySelector(".messageContainer");
+        triggerFireworks(formContainer); // Anropa funktionen för att utlösa fyrverkerier
 
         showSuccessNotification(); // Visar en notifiering om att meddelandet skickades
     } catch (error) {
