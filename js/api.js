@@ -45,7 +45,7 @@ function createRandomColor() {
     if (Math.abs(blue - red) < MIN_DIFF) red = (red + 100) % 256;
 
     const rgbColor = `rgb(${red}, ${green}, ${blue})`;
-    console.log(rgbColor);
+
     return rgbColor;
 }
 
@@ -92,7 +92,33 @@ export async function addMessage(event) {
         const data = await res.json();
         console.log("Message added:", data);
 
-        fetchMessages();
+        // Add the message to the DOM with a "Remove" button
+        const messageDisplay = document.querySelector("#messageDisplay");
+        if (messageDisplay) {
+            const messageItem = document.createElement("div");
+            messageItem.classList.add("message-item");
+
+            // Add message content
+            const messageContent = document.createElement("p");
+            messageContent.textContent = `${name}: ${message}`;
+
+            // Add "Remove" button
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.classList.add("remove-button");
+            removeButton.addEventListener("click", () => {
+                console.log("Remove button clicked for:", message);
+                messageItem.remove(); // Remove the message div
+            });
+
+            // Append content and button to the message item
+            messageItem.append(removeButton, messageContent);
+
+            // Append the message item to the display container
+            messageDisplay.appendChild(messageItem);
+        } else {
+            console.error("Error: #messageDisplay not found");
+        }
 
         nameInput.value = "";
         messageInput.value = "";
@@ -181,14 +207,31 @@ export function displayMessages(messages) {
         const backgroundColor = createRandomColor();
         messageElement.style.backgroundColor = backgroundColor;
 
-        messageElement.innerHTML = `
-                <strong>${message.name}</strong> (${message.timestamp}) <br>
-                ${message.message}
-                <hr>
-            `;
+        // Add message content
+        const messageContent = document.createElement("p");
+        messageContent.innerHTML = `
+            <strong>${message.name}</strong> (${message.timestamp}) <br>
+            ${message.message}
+        `;
+
+        // Add "Remove" button
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.classList.add("remove-button");
+        removeButton.addEventListener("click", () => {
+            console.log("Remove button clicked for:", message.message);
+            messageElement.remove(); // Remove the message div
+        });
+
+        // Append content and button to the message element
+        messageElement.appendChild(messageContent);
+        messageElement.appendChild(removeButton);
+
+        // Prepend the message element to the display container
         messageDisplay.prepend(messageElement);
-        shakeMessages();
     });
+
+    shakeMessages();
 }
 
 // Ny funktion för att visa en notifiering om att meddelandet skickades

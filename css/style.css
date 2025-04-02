@@ -27,6 +27,11 @@ body.dark-mode .formContainer {
     color: white;
 }
 
+.message-item {
+    padding: 10px;
+    color: white;
+}
+
 .messageContainer {
     background-color: white;
 }
@@ -238,7 +243,19 @@ body.dark-mode .formContainer {
 
 /* Animation for showing/hiding messages */
 .message-item {
+    display: flex;
+    justify-content: space-between;
     transition: opacity 0.3s ease;
+}
+
+.remove-button {
+    margin-left: 50px;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
 @keyframes bounce {
@@ -261,4 +278,53 @@ body.dark-mode .formContainer {
 
 .bounceEffect {
     animation: bounce 1s infinite;
+}
+
+@media screen and (max-width: 768px) and (max-height: 1024px) {
+    #motdDisplay {
+        text-align: center;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .formContainer {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        padding: 10px;
+    }
+
+    #messageForm {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .formContainer form {
+        flex-direction: row;
+        gap: 15px; /* Adjust spacing between elements */
+    }
+
+    .formContainer input,
+    .formContainer textarea {
+        width: auto; /* Adjust width for smaller screens */
+    }
+
+    .messageContainer {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #sort {
+        margin: 15px;
+    }
+
+    .message-item {
+        text-align: center;
+        padding: 10px;
+    }
+
 }
