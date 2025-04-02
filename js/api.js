@@ -108,9 +108,42 @@ export async function addMessage(event) {
             const removeButton = document.createElement("button");
             removeButton.textContent = "Remove";
             removeButton.classList.add("remove-button");
-            removeButton.addEventListener("click", () => {
+            // Add "Remove" button functionality with Firebase deletion
+            removeButton.addEventListener("click", async () => {
                 console.log("Remove button clicked for:", message);
-                messageItem.remove(); // Remove the message div
+
+                try {
+                    // Find the key of the message to delete
+                    const messageKey = Object.keys(data).find(
+                        (key) =>
+                            data[key].message === message &&
+                            data[key].name === name
+                    );
+
+                    if (!messageKey) {
+                        console.error("Message key not found for:", message);
+                        return;
+                    }
+
+                    // Make a DELETE request to Firebase
+                    const deleteUrl = `https://fe24-vs-grupp1-slutprojekt-default-rtdb.europe-west1.firebasedatabase.app/${messageKey}.json`;
+                    const deleteResponse = await fetch(deleteUrl, {
+                        method: "DELETE",
+                    });
+
+                    if (!deleteResponse.ok) {
+                        throw new Error(
+                            "Failed to delete message from Firebase"
+                        );
+                    }
+
+                    console.log("Message deleted from Firebase:", messageKey);
+
+                    // Remove the message div from the DOM
+                    messageItem.remove();
+                } catch (error) {
+                    console.error("Error deleting message:", error);
+                }
             });
 
             // Append content and button to the message item
@@ -124,7 +157,7 @@ export async function addMessage(event) {
 
         nameInput.value = "";
         messageInput.value = "";
-            const formContainer = document.querySelector(".messageContainer");
+        const formContainer = document.querySelector(".messageContainer");
         triggerFireworks(formContainer); // Anropa funktionen för att utlösa fyrverkerier
 
         showSuccessNotification(); // Visar en notifiering om att meddelandet skickades
@@ -140,12 +173,13 @@ export async function fetchMessages() {
         if (!res.ok) throw new Error("Could not fetch messages");
 
         const data = await res.json();
-        let messageArray = data ? Object.values(data) : [];
         const sortOption = sortfilter.value;
         console.log(sortOption);
+
+        let messageArray = data ? Object.entries(data) : [];
         switch (sortOption) {
             case "alpha-asend":
-                messageArray.sort((b, a) => {
+                messageArray.sort(([, a], [, b]) => {
                     if (a.name < b.name) return -1;
                     else if (a.name > b.name) return 1;
                     return 0;
@@ -153,14 +187,14 @@ export async function fetchMessages() {
                 break;
 
             case "alpha-desend":
-                messageArray.sort((a, b) => {
+                messageArray.sort(([, a], [, b]) => {
                     if (a.name < b.name) return -1;
                     else if (a.name > b.name) return 1;
                     return 0;
                 });
                 break;
             case "message-length":
-                messageArray.sort((b, a) => {
+                messageArray.sort(([, a], [, b]) => {
                     if (a.message.length < b.message.length) return -1;
                     else if (a.message.length > b.message.length) return 1;
                     return 0;
@@ -175,8 +209,8 @@ export async function fetchMessages() {
         if (messageArray.length === 0) {
             displayNoMessagesMessage(); // Visa meddelande om inga meddelanden finns
         } else {
-            displayMessages(messageArray); // Visa meddelandena
-            displayMessageOfTheDay(messageArray); // Visa dagens meddelande
+            displayMessages(Object.fromEntries(messageArray)); // Pass the sorted data as an object
+            displayMessageOfTheDay(Object.values(data)); // Visa dagens meddelande
         }
     } catch (error) {
         console.error("Error fetching messages:", error);
@@ -205,7 +239,7 @@ export function displayMessages(messages) {
 
     messageDisplay.innerHTML = "";
 
-    messages.forEach((message) => {
+    Object.entries(messages).forEach(([messageKey, message]) => {
         const messageElement = document.createElement("div");
         messageElement.classList.add("message-item");
         const backgroundColor = createRandomColor();
@@ -222,9 +256,27 @@ export function displayMessages(messages) {
         const removeButton = document.createElement("button");
         removeButton.textContent = "Remove";
         removeButton.classList.add("remove-button");
-        removeButton.addEventListener("click", () => {
+        removeButton.addEventListener("click", async () => {
             console.log("Remove button clicked for:", message.message);
-            messageElement.remove(); // Remove the message div
+
+            try {
+                // Make a DELETE request to Firebase
+                const deleteUrl = `https://fe24-vs-grupp1-slutprojekt-default-rtdb.europe-west1.firebasedatabase.app/${messageKey}.json`;
+                const deleteResponse = await fetch(deleteUrl, {
+                    method: "DELETE",
+                });
+
+                if (!deleteResponse.ok) {
+                    throw new Error("Failed to delete message from Firebase");
+                }
+
+                console.log("Message deleted from Firebase:", messageKey);
+
+                // Remove the message div from the DOM
+                messageElement.remove();
+            } catch (error) {
+                console.error("Error deleting message:", error);
+            }
         });
 
         // Append content and button to the message element
