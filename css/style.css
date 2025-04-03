@@ -359,13 +359,9 @@ body.dark-mode nav.formContainer {
 }
 
 body.dark-mode .navButton {
-    background-color: #0056b3;
     color: white;
 }
 
-body.dark-mode .navButton:hover {
-    background-color: #004a99;
-}
 
 #darkModeToggle {
     background: none;

@@ -74,13 +74,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initial theme check
     updateSearchTheme();
-    
-    // Listen for dark mode changes
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', () => {
-            // Small delay to ensure the body class has been updated
-            setTimeout(updateSearchTheme, 10);
-        });
-    }
 });
