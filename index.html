@@ -26,28 +26,26 @@
     <body>
         <div class="formContainer">
             <form id="messageForm">
-                <label for="name">Username:</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your name"
-                    required
-                />
-                <textarea
-                    name="message"
-                    id="messageBoard"
-                    placeholder="Write your message here"
-                ></textarea>
-                <button type="submit" id="submitButton">Submit</button>
+              <label for="name">Username:</label>
+              <input type="text" id="name" name="name" placeholder="Enter your name" required />
+              <textarea name="message" id="messageBoard" placeholder="Write your message here"></textarea>
+              <button type="submit" id="submitButton">Submit</button>
+          
+              <div class="navLinks">
+                <a href="aboutUs.html" class="navButton">About Us</a>
+                <a href="contactUs.html" class="navButton">Contact Us</a>
+              </div>
             </form>
+          
             <select name="sort-messages" id="sort">
               <option value="chronological" selected="selected">Date</option>
-              <option value="alpha-asend">Alphabetical asending</option>
-              <option value="alpha-desend">Alphabetical decending</option>
+              <option value="alpha-asend">Alphabetical ascending</option>
+              <option value="alpha-desend">Alphabetical descending</option>
               <option value="message-length">Message length</option>
             </select>
+          
             <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
+          </div>          
             <div class="birthdayDiv">
                 <h1>OMG IT'S YOUR BIRTHDAY 🎉🎂</h1>
             </div>

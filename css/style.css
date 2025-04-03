@@ -85,7 +85,7 @@ body.dark-mode .formContainer {
     color: white;
     border: none;
     padding: 5px 10px;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
 }
@@ -256,6 +256,7 @@ body.dark-mode .formContainer {
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 @keyframes bounce {
@@ -320,3 +321,137 @@ body.dark-mode .formContainer {
     }
 
 }
+
+nav.formContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #8c8c8c;
+    padding: 20px;
+    border-radius: 5px;
+    gap: 10px;
+}
+
+.navLinks {
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.navButton {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.navButton:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+body.dark-mode nav.formContainer {
+    background-color: #444;
+}
+
+body.dark-mode .navButton {
+    background-color: #0056b3;
+    color: white;
+}
+
+body.dark-mode .navButton:hover {
+    background-color: #004a99;
+}
+
+#darkModeToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: inherit;
+    transition: transform 0.2s;
+    margin-left: auto; 
+}
+
+#darkModeToggle:hover {
+    transform: scale(1.2);
+}
+
+.contact-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    min-height: calc(100vh - 100px);
+}
+
+.contact-card {
+    background-color: white;
+    border: 1px solid #999;
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.contact-card p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.contact-card ul {
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    max-width: 500px;
+    margin: 0; 
+}
+
+.linkedin-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .linkedin-btn {
+    background-color: #0077b5;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 50%;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .linkedin-btn:hover {
+    background-color: #005983;
+    transform: scale(1.1);
+  }
+  
+  body.dark-mode .linkedin-btn {
+    background-color: #005983;
+  }
+  
