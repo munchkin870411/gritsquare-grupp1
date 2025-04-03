@@ -96,6 +96,19 @@ const messageInput = document.getElementById("messageBoard");
 const charCounter = document.getElementById("char-counter");
 
 messageInput.addEventListener("input", () => {
-  const currentLength = messageInput.value.length;
-  charCounter.textContent = `${currentLength}/200 characters`;
+  let currentLength = messageInput.value.length;
+
+  if (currentLength > 50) {
+    messageInput.value = messageInput.value.slice(0, 50);
+    currentLength = 50;
+  }
+
+  charCounter.textContent = `${currentLength}/50 characters`;
+
+  // Change the counter color to red if the limit is reached
+  if (currentLength === 50) {
+    charCounter.style.color = "red";
+  } else {
+    charCounter.style.color = ""; // Reset to default color
+  }
 });
