@@ -342,8 +342,6 @@ export function displayMessageOfTheDay(messages) {
     `;
 }
 
-
-
 export async function profanityCheckAndPost(message) {
     try {
         const res = await fetch('https://vector.profanity.dev', {
