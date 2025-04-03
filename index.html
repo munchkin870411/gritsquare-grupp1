@@ -35,6 +35,22 @@
                 <a href="aboutUs.html" class="navButton">About Us</a>
                 <a href="contactUs.html" class="navButton">Contact Us</a>
               </div>
+              
+                <label for="name">Username:</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                />
+                <textarea
+                    name="message"
+                    id="messageBoard"
+                    placeholder="Write your message here"
+                ></textarea>
+                <p id="char-counter">0/50 characters</p>
+                <button type="submit" id="submitButton">Submit</button>
             </form>
           
             <select name="sort-messages" id="sort">
