@@ -11,6 +11,27 @@ body {
     height: 100%;
 }
 
+body {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode .formContainer {
+    background-color: rgb(38, 38, 38);
+    color: white;
+}
+
+.message-item {
+    padding: 10px;
+    color: white;
+}
+
 .messageContainer {
     background-color: white;
 }
@@ -19,9 +40,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #333;
+    background-color: #8c8c8c;
     padding: 20px 20px;
     border-radius: 5px;
+    color: white;
+}
+
+.formContainer.dark-mode {
+    background-color: #444;
     color: white;
 }
 
@@ -64,9 +90,27 @@ body {
     font-weight: bold;
 }
 
+#submitButton.dark-mode {
+    background-color: #444;
+    color: white;
+}
+
 #submitButton:hover {
     background-color: #0056b3;
     scale: 110%;
+}
+
+#darkModeToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: inherit; /* Matches the current text color */
+    transition: transform 0.2s;
+}
+
+#darkModeToggle:hover {
+    transform: scale(1.2);
 }
 
 .message {
@@ -118,20 +162,100 @@ body {
     animation: shake 1s;
 }
 
-
-.birthdayDiv{
-  display: none;
-  position: absolute;
-  font-size: 100px;
-  z-index: 100000;
-  top: 70px;
-  color: #ff13b4;
-  background-color: #0056b3;
-  left: 0;
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
 }
 
-.birthdayDiv h1{
-  animation: bounce 1s infinite;
+.birthdayDiv {
+    display: none;
+    position: absolute;
+    font-size: 100px;
+    z-index: 100000;
+    top: 70px;
+    color: #ff13b4;
+    background-color: #0056b3;
+    left: 0;
+}
+
+.birthdayDiv h1 {
+    animation: bounce 1s infinite;
+}
+
+.search-container {
+    position: relative;
+    margin: 15px 0;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#messageSearch {
+    width: 100%;
+    padding: 8px 12px 8px 35px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    left: 30px;
+    color: #777;
+}
+
+#messageSearch:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.search-container.dark-mode #messageSearch {
+    background-color: #333;
+    color: white;
+    border-color: #555;
+}
+
+.search-container.dark-mode .search-icon {
+    color: #aaa;
+}
+
+#searchResultCount {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #777;
+}
+
+.search-container.dark-mode #searchResultCount {
+    color: #bbb;
+}
+
+/* Animation for showing/hiding messages */
+.message-item {
+    display: flex;
+    justify-content: space-between;
+    transition: opacity 0.3s ease;
+}
+
+.remove-button {
+    margin-left: 50px;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
 @keyframes bounce {
@@ -156,3 +280,51 @@ body {
     animation: bounce 1s infinite;
 }
 
+@media screen and (max-width: 768px) and (max-height: 1024px) {
+    #motdDisplay {
+        text-align: center;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .formContainer {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        padding: 10px;
+    }
+
+    #messageForm {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .formContainer form {
+        flex-direction: row;
+        gap: 15px; /* Adjust spacing between elements */
+    }
+
+    .formContainer input,
+    .formContainer textarea {
+        width: auto; /* Adjust width for smaller screens */
+    }
+
+    .messageContainer {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #sort {
+        margin: 15px;
+    }
+
+    .message-item {
+        text-align: center;
+        padding: 10px;
+    }
+
+}
