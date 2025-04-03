@@ -65,6 +65,11 @@ export async function addMessage(event) {
         alert("Provide both name and message");
         return;
     }
+    const msgProf = await profanityCheckAndPost(message);
+    if (msgProf.isProfanity) {
+        alert("Please refrain from using profanity.");
+        return;
+    }
     if (message.includes("my birthday")) {
         birthdayDiv.style.display = "block";
         setTimeout(() => {
@@ -335,4 +340,33 @@ export function displayMessageOfTheDay(messages) {
         <strong>${motd.name}</strong> (${motd.timestamp}) <br>
         "${motd.message}"
     `;
+}
+
+
+
+export async function profanityCheckAndPost(message) {
+    try {
+        const res = await fetch('https://vector.profanity.dev', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message }),
+        });
+
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json();
+        console.log(data)
+       if(data.isProfanity == true){
+        return {isProfanity: true};
+       }
+       else{
+        return {isProfanity: false};
+       }
+       
+    } catch (error) {
+        console.error("Error checking profanity:", error);
+        return false; 
+    }
 }
