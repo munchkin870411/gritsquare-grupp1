@@ -90,3 +90,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+/// Character Counter Messages
+const messageInput = document.getElementById("messageBoard");
+const charCounter = document.getElementById("char-counter");
+
+messageInput.addEventListener("input", () => {
+  const currentLength = messageInput.value.length;
+  charCounter.textContent = `${currentLength}/200 characters`;
+});
